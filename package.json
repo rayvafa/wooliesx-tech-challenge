@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.12.3",
+    "lodash": "^4.17.11",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {

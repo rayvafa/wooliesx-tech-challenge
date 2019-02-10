@@ -1,3 +1,4 @@
+const orderBy = require('lodash/orderBy');
 const GetProducts = require('../clients/GetProducts');
 
 function SortProducts(req, res) {
@@ -5,9 +6,29 @@ function SortProducts(req, res) {
   console.log(sortOption);
 
   GetProducts().then((products) => {
-    console.log(products);
+    let sortedProducts = [];
+
+    switch(sortOption) {
+      case 'Low':
+        sortedProducts = orderBy(products, ['price'], ['asc']);
+        break;
+      case 'High':
+        sortedProducts = orderBy(products, ['price'], ['desc']);
+        break;
+      case 'Ascending':
+        sortedProducts = orderBy(products, ['name'], ['asc']);
+        break;
+      case 'Descending':
+        sortedProducts = orderBy(products, ['name'], ['desc']);
+        break;
+      case 'Recommended':
+        // todo recommended logic
+        sortedProducts = [];
+        break;
+    }
+
     res.header('Content-Type', 'application/json');
-    res.end(JSON.stringify(products));
+    res.end(JSON.stringify(sortedProducts));
   });
 }
 
