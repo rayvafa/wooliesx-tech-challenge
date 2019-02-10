@@ -4,9 +4,9 @@ info:
   title: Woolies X tech challenge API
 # during dev, should point to your local machine
 host: localhost:10010
-# basePath prefixes all resource paths 
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -29,6 +29,30 @@ paths:
           schema:
             $ref: "#/definitions/User"
       x-swagger-router-controller: "GetUser"
+  /api/sort:
+    get:
+      description: "Exercise 2 - endpoint for sorting products"
+      operationId: "SortProducts"
+      parameters:
+        - in: "query"
+          name: "sortOption"
+          description: "option for sorting"
+          required: true
+          type: "string"
+          enum:
+            - "Low"
+            - "High"
+            - "Ascending"
+            - "Descending"
+            - "Recommended"
+      responses:
+        200:
+          description: "An array of sorted products"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+      x-swagger-router-controller: "SortProducts"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -42,3 +66,9 @@ definitions:
       token:
         type: "string"
         description: "user access token"
+  Product:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the product"
