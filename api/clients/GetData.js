@@ -1,10 +1,10 @@
 const axios = require('axios');
 const config = require('../../config/index');
 
-async function getProducts() {
+async function GetData(url) {
   try {
     const response = await axios.get(
-      config.WOOLIESX_API.PRODUCTS,
+      url,
       {
         params: {
           token: config.TOKEN
@@ -18,4 +18,4 @@ async function getProducts() {
   }
 }
 
-module.exports = getProducts;
+module.exports = GetData;
